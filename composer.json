@@ -1,0 +1,71 @@
+{
+	"$schema": "https://getcomposer.org/schema.json",
+	"name": "chillerlan/php-library-template-nodocs",
+	"description": "A PHP Library template/boilerplate.",
+	"license": "MIT",
+	"type": "library",
+	"keywords": ["boilerplate", "library-template"],
+	"authors": [
+		{
+			"name": "smiley",
+			"email": "smiley@chillerlan.net",
+			"homepage": "https://github.com/codemasher"
+		},
+		{
+			"name": "Contributors",
+			"homepage":"https://github.com/chillerlan/php-library-template-nodocs/graphs/contributors"
+		}
+	],
+	"funding": [
+		{
+			"type": "Ko-Fi",
+			"url": "https://ko-fi.com/codemasher"
+		}
+	],
+	"homepage": "https://github.com/chillerlan/php-library-template-nodocs",
+	"support": {
+		"issues": "https://github.com/chillerlan/php-library-template-nodocs/issues",
+		"source": "https://github.com/chillerlan/php-library-template-nodocs"
+	},
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"require": {
+		"php": "^8.1"
+	},
+	"require-dev": {
+		"phan/phan": "^5.5.0",
+		"phpmd/phpmd": "^2.15",
+		"phpstan/phpstan": "^2.1.22",
+		"phpstan/phpstan-deprecation-rules": "^2.0.3",
+		"phpunit/phpunit": "^10.5",
+		"slevomat/coding-standard": "^8.15",
+		"squizlabs/php_codesniffer": "^3.10"
+	},
+	"suggest": {
+	},
+	"autoload": {
+		"psr-4": {
+			"chillerlan\\LibraryTemplate\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"chillerlan\\LibraryTemplateTest\\": "tests"
+		}
+	},
+	"scripts": {
+		"phan": "@php vendor/bin/phan",
+		"phpcs": "@php vendor/bin/phpcs -v",
+		"phpstan": "@php vendor/bin/phpstan",
+		"phpstan-baseline": "@php vendor/bin/phpstan --generate-baseline",
+		"phpunit": "@php vendor/bin/phpunit"
+	},
+	"config": {
+		"lock": false,
+		"sort-packages": true,
+		"platform-check": true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}
