@@ -1,10 +1,13 @@
 {
 	"$schema": "https://getcomposer.org/schema.json",
-	"name": "chillerlan/php-library-template-nodocs",
-	"description": "A PHP Library template/boilerplate.",
+	"name": "chillerlan/2fa-qrcode-bundle",
+	"description": "An authenticator and a QR Code generator bundled together for MFA in frameworks and applications.",
 	"license": "MIT",
 	"type": "library",
-	"keywords": ["boilerplate", "library-template"],
+	"keywords": [
+		"2fa", "authenticator", "qrcode", "google2fa", "hotp", "mfa",
+		"otp", "rfc4226", "rfc6238", "tfa", "totp", "two factor"
+	],
 	"authors": [
 		{
 			"name": "smiley",
@@ -13,7 +16,7 @@
 		},
 		{
 			"name": "Contributors",
-			"homepage":"https://github.com/chillerlan/php-library-template-nodocs/graphs/contributors"
+			"homepage":"https://github.com/chillerlan/2fa-qrcode-bundle/graphs/contributors"
 		}
 	],
 	"funding": [
@@ -22,42 +25,39 @@
 			"url": "https://ko-fi.com/codemasher"
 		}
 	],
-	"homepage": "https://github.com/chillerlan/php-library-template-nodocs",
+	"homepage": "https://github.com/chillerlan/2fa-qrcode-bundle",
 	"support": {
-		"issues": "https://github.com/chillerlan/php-library-template-nodocs/issues",
-		"source": "https://github.com/chillerlan/php-library-template-nodocs"
+		"issues": "https://github.com/chillerlan/2fa-qrcode-bundle/issues",
+		"source": "https://github.com/chillerlan/2fa-qrcode-bundle"
 	},
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"require": {
-		"php": "^8.1"
+		"php": "^7.4 || ^8.0",
+		"chillerlan/php-authenticator": "^4.5.0",
+		"chillerlan/php-qrcode": "^5.0.5",
+		"chillerlan/php-settings-container": "^2.1.6"
 	},
 	"require-dev": {
-		"phan/phan": "^5.5.0",
+		"phan/phan": "^5.5.2",
 		"phpmd/phpmd": "^2.15",
-		"phpstan/phpstan": "^2.1.22",
-		"phpstan/phpstan-deprecation-rules": "^2.0.3",
-		"phpunit/phpunit": "^10.5",
-		"slevomat/coding-standard": "^8.15",
-		"squizlabs/php_codesniffer": "^3.10"
-	},
-	"suggest": {
+		"phpunit/phpunit": "^9.6",
+		"slevomat/coding-standard": "^8.28",
+		"squizlabs/php_codesniffer": "^4.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"chillerlan\\LibraryTemplate\\": "src"
+			"chillerlan\\TwoFactorQRCode\\": "src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"chillerlan\\LibraryTemplateTest\\": "tests"
+			"chillerlan\\TwoFactorQRCodeTest\\": "tests"
 		}
 	},
 	"scripts": {
 		"phan": "@php vendor/bin/phan",
 		"phpcs": "@php vendor/bin/phpcs -v",
-		"phpstan": "@php vendor/bin/phpstan",
-		"phpstan-baseline": "@php vendor/bin/phpstan --generate-baseline",
 		"phpunit": "@php vendor/bin/phpunit"
 	},
 	"config": {

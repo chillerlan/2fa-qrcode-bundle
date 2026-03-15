@@ -21,7 +21,7 @@ on:
 name: "Continuous Integration"
 
 env:
-  PHP_EXTENSIONS: "" # caution: setting 'none' resets/disables shared extensions
+  PHP_EXTENSIONS: curl, fileinfo, gd, imagick, json, mbstring, sodium
   PHP_INI_VALUES: memory_limit=-1, error_reporting=-1, display_errors=On
 
 jobs:
@@ -38,10 +38,13 @@ jobs:
       fail-fast: true
       matrix:
         php-version:
+          - "7.4"
+          - "8.0"
           - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
+          - "8.5"
 
     steps:
       - name: "Checkout"
@@ -56,7 +59,7 @@ jobs:
           coverage: none
 
       - name: "Validate composer.json"
-        run: composer validate --ansi --strict
+        run: composer validate --no-interaction --ansi --verbose --with-dependencies
 
       - name: "Install dependencies with composer"
         uses: ramsey/composer-install@v3
@@ -66,9 +69,6 @@ jobs:
 
       - name: "Run phan"
         run: php vendor/bin/phan --target-php-version=${{ matrix.php-version }}
-
-      - name: "Run PHPStan"
-        run: php vendor/bin/phpstan
 
 
   tests:
@@ -83,10 +83,13 @@ jobs:
           - ubuntu-latest
           - windows-latest
         php-version:
+          - "7.4"
+          - "8.0"
           - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
+          - "8.5"
 
     steps:
       - name: "Checkout"

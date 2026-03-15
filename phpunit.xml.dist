@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         cacheDirectory=".build/phpunit-cache"
+         cacheResultFile=".build/phpunit.result.cache"
          colors="true"
+         verbose="true"
 >
 	<testsuites>
-		<testsuite name="chillerlan test suite">
+		<testsuite name="php-authenticator test suite">
 			<directory>tests</directory>
 		</testsuite>
 	</testsuites>
-	<source>
+	<coverage processUncoveredFiles="true">
 		<include>
-			<directory>src</directory>
+			<directory suffix=".php">src</directory>
 		</include>
-	</source>
-	<coverage>
 		<report>
 			<clover outputFile=".build/coverage/clover.xml"/>
 			<xml outputDirectory=".build/coverage/coverage-xml"/>
