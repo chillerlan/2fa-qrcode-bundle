@@ -1,45 +1,48 @@
-# chillerlan/php-library-template-nodocs
+# chillerlan/2fa-qrcode-bundle
 
-A template/boilerplate for PHP libraries (similar to [chillerlan/php-library-template](https://github.com/chillerlan/php-library-template) but without phpdocs and readthedocs deployment).
+An authenticator ([chillerlan/php-authenticator](https://github.com/chillerlan/php-authenticator)) and a QR Code generator ([chillerlan/php-qrcode](https://github.com/chillerlan/php-qrcode)) bundled together for MFA in frameworks and applications.
 
 [![PHP Version Support][php-badge]][php]
 [![Packagist version][packagist-badge]][packagist]
 [![License][license-badge]][license]
 [![Continuous Integration][gh-action-badge]][gh-action]
-[![CodeCov][coverage-badge]][coverage]
 [![Packagist downloads][downloads-badge]][downloads]
 
-[php-badge]: https://img.shields.io/packagist/php-v/chillerlan/php-library-template-nodocs?logo=php&color=8892BF&logoColor=fff
+[php-badge]: https://img.shields.io/packagist/php-v/chillerlan/2fa-qrcode-bundle?logo=php&color=8892BF&logoColor=fff
 [php]: https://www.php.net/supported-versions.php
-[packagist-badge]: https://img.shields.io/packagist/v/chillerlan/php-library-template-nodocs.svg?logo=packagist&logoColor=fff
-[packagist]: https://packagist.org/packages/chillerlan/php-library-template-nodocs
-[license-badge]: https://img.shields.io/github/license/chillerlan/php-library-template-nodocs
-[license]: https://github.com/chillerlan/php-library-template-nodocs/blob/main/LICENSE
-[gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/php-library-template-nodocs/ci.yml?branch=main&logo=github&logoColor=fff
-[gh-action]: https://github.com/chillerlan/php-library-template-nodocs/actions/workflows/ci.yml?query=branch%3Amain
-[coverage-badge]: https://img.shields.io/codecov/c/github/chillerlan/php-library-template-nodocs.svg?logo=codecov&logoColor=fff
-[coverage]: https://codecov.io/github/chillerlan/php-library-template-nodocs
-[downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-library-template-nodocs.svg?logo=packagist&logoColor=fff
-[downloads]: https://packagist.org/packages/chillerlan/php-library-template-nodocs/stats
+[packagist-badge]: https://img.shields.io/packagist/v/chillerlan/2fa-qrcode-bundle.svg?logo=packagist&logoColor=fff
+[packagist]: https://packagist.org/packages/chillerlan/2fa-qrcode-bundle
+[license-badge]: https://img.shields.io/github/license/chillerlan/2fa-qrcode-bundle
+[license]: https://github.com/chillerlan/2fa-qrcode-bundle/blob/main/LICENSE
+[gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/2fa-qrcode-bundle/ci.yml?branch=main&logo=github&logoColor=fff
+[gh-action]: https://github.com/chillerlan/2fa-qrcode-bundle/actions/workflows/ci.yml?query=branch%3Amain
+[downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/2fa-qrcode-bundle.svg?logo=packagist&logoColor=fff
+[downloads]: https://packagist.org/packages/chillerlan/2fa-qrcode-bundle/stats
 
-## Overview
+## Requirements
 
-### Features
+- PHP 7.4+
+  - [`ext-mbstring`](https://www.php.net/manual/book.mbstring.php)
+  - optional:
+    - [`ext-gd`](https://www.php.net/manual/book.image) for `QRGdImage` based output
+    - [`ext-imagick`](https://github.com/Imagick/imagick) with [ImageMagick](https://imagemagick.org) installed
+    - [`ext-fileinfo`](https://www.php.net/manual/book.fileinfo.php) required by `QRImagick` output
+    - optional libraries, see the [php-qrcode requirements](https://github.com/chillerlan/php-qrcode)
 
-- [GitHub Actions](https://github.com/chillerlan/php-library-template-nodocs/actions) runner
-- [Composer](https://getcomposer.org) dependency management
-- [PHPUnit](https://phpunit.de) unit tests
-- [PHPStan](https://github.com/phpstan/phpstan) static analysis
-- [PHPCS](https://github.com/PHPCSStandards/PHP_CodeSniffer) coding standard analyzer
-- [PHPMD](https://phpmd.org) mess detector
-- [Codecov](https://codecov.io) code coverage analysis
-- [phpDocumentor](https://www.phpdoc.org) auto generated API docs
+## Documentation
 
+You can find the documentation of the bundled libraries in their respective repositories:
 
-### Requirements
+- [chillerlan/php-authenticator](https://github.com/chillerlan/php-authenticator)
+- [chillerlan/php-qrcode](https://github.com/chillerlan/php-qrcode)
+  - User manual: https://php-qrcode.readthedocs.io/
+  - API documentation: https://chillerlan.github.io/php-qrcode/
+- [chillerlan/php-settings-container](https://github.com/chillerlan/php-settings-container)
 
-- PHP 8.1+
+## Anti clanker policy
 
+No fascist plagiarism machines were - or will ever be - used in creating of this and any of the bundled libraries.
+Clanker created pull requests will not be accepted. However, I have no control over 3rd-party libraries, but will avoid clankers wherever I can.
 
 ## Disclaimer
 
