@@ -21,7 +21,7 @@ An authenticator ([chillerlan/php-authenticator](https://github.com/chillerlan/p
 
 ## Requirements
 
-- PHP 7.4+
+- PHP 8.2+
   - [`ext-mbstring`](https://www.php.net/manual/book.mbstring.php)
   - optional:
     - [`ext-gd`](https://www.php.net/manual/book.image) for `QRGdImage` based output
@@ -35,7 +35,7 @@ You can find the documentation of the bundled libraries in their respective repo
 
 - [chillerlan/php-authenticator](https://github.com/chillerlan/php-authenticator)
 - [chillerlan/php-qrcode](https://github.com/chillerlan/php-qrcode)
-  - User manual: https://php-qrcode.readthedocs.io/
+  - User manual: https://php-qrcode.readthedocs.io/en/v6.0.x/
   - API documentation: https://chillerlan.github.io/php-qrcode/
 - [chillerlan/php-settings-container](https://github.com/chillerlan/php-settings-container)
 
@@ -43,19 +43,19 @@ You can find the documentation of the bundled libraries in their respective repo
 
 #### Invocation
 
-Fetch the settings from e.g. a framework config and [invoke the `TwoFactorQRCodeOptions` instance](https://php-qrcode.readthedocs.io/en/v5.0.x/Usage/Advanced-usage.html#configuration-via-qroptions) with it.
-Please note that this object combines the settings for [`AuthenticatorOptions`](https://github.com/chillerlan/php-authenticator?tab=readme-ov-file#authenticatoroptions) and [`QROptions`](https://php-qrcode.readthedocs.io/en/v5.0.x/Usage/Configuration-settings.html).
+Fetch the settings from e.g. a framework config and [invoke the `TwoFactorQRCodeOptions` instance](https://php-qrcode.readthedocs.io/en/v6.0.x/Usage/Advanced-usage.html#configuration-via-qroptions) with it.
+Please note that this object combines the settings for [`AuthenticatorOptions`](https://github.com/chillerlan/php-authenticator?tab=readme-ov-file#authenticatoroptions) and [`QROptions`](https://php-qrcode.readthedocs.io/en/v6.0.x/Usage/Configuration-settings.html).
+Alternatively, you can just pass an `iterable` of options to the `TwoFactorQRCode` constructor.
 
 ```php
-use chillerlan\TwoFactorQRCode\{TwoFactorQRCode, TwoFactorQRCodeOptions};
+use chillerlan\TwoFactorQRCode\TwoFactorQRCode;
 
 $options = [
 	'secret_length' => 128,
 	'adjacent'      => 2,
 ];
 
-$twoFactorQRCodeOptions = new TwoFactorQRCodeOptions($options);
-$twoFactorQRCode        = new TwoFactorQRCode($twoFactorQRCodeOptions);
+$twoFactorQRCode = new TwoFactorQRCode($options);
 ```
 
 #### User registration
@@ -100,7 +100,6 @@ The user has lost access to their authenticator, send them to a form separate fr
 - Verify the given backup OTP against the stored counter value.
 - After verification, increase the counter, create a new backup code and save the new counter value.
 - Present the new backup code to the user and make them triple check that they have carefully saved it.
-- Redirect the user to wherever they can manage their 2FA settings and retrieve their secret once again.
 
 ```php
 $twoFactorQRCode->setSecret($userSecret);
@@ -112,6 +111,15 @@ if($twoFactorQRCode->verifyBackupCode($backupOTP, $counterValue)){
 
 	// redirect
 }
+```
+
+Redirect the user to wherever they can manage their 2FA settings and retrieve their secret once again:
+
+```php
+$twoFactorQRCode->setSecret($userSecret);
+
+$currentBackup = $twoFactorQRCode->createBackupCode($currentCounterValue);
+$qrcode        = $twoFactorQRCode->getQRCode('label', 'issuer');
 ```
 
 #### Validating an e-mail address
@@ -158,18 +166,18 @@ However, some of [the top used libraries on packagist](https://packagist.org/sea
 
 The class is not final and you're free to extend it to add/change functionality to your liking.
 
-| method                                                          | return   | description                                                                                                   |
-|-----------------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------------------|
-| `__construct(SettingsContainerInterface\|null $options = null)` | -        |                                                                                                               |
-| `createSecret(int\|null $length = null)`                        | `string` | Creates a cryptograpically secure random secret and returns it as Base32 encoded string                       |
-| `setSecret(string $encodedSecret)`                              | `static` | Sets a secret phrase from an encoded representation                                                           |
-| `getSecret()`                                                   | `string` | Returns an encoded representation of the current secret phrase                                                |
-| `setRawSecret(string $rawSecret)`                               | `static` | Sets a secret phrase from a raw binary representation                                                         |
-| `getRawSecret()`                                                | `string` | Returns the raw representation of the current secret phrase                                                   |
-| `verifyOTP(string $otp, int\|null $timestamp = null)`           | `bool`   | Verifies a one-time password (TOTP) with an optional unix timestamp                                           |
-| `createBackupCode(int $counter)`                                | `string` | Creates a counter-based one-time password (HOTP) from the given counter value                                 |
-| `verifyBackupCode(string $otp, int $counter)`                   | `bool`   | Verifies a counter-based backup code (HOTP) against the given counter value                                   |
-| `getQRCode(string $label, string $issuer)`                      | `string` | Creates a QR Code for use with a mobile authenticator application (TOTP) with the given label and issuer name |
+| method                                                                                                             | return   | description                                                                                                   |
+|--------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------------------|
+| `__construct(SettingsContainerInterface\|TwoFactorQRCodeOptions \|iterable $options = new TwoFactorQRCodeOptions)` | -        |                                                                                                               |
+| `createSecret(int\|null $length = null)`                                                                           | `string` | Creates a cryptograpically secure random secret and returns it as Base32 encoded string                       |
+| `setSecret(string $encodedSecret)`                                                                                 | `static` | Sets a secret phrase from an encoded representation                                                           |
+| `getSecret()`                                                                                                      | `string` | Returns an encoded representation of the current secret phrase                                                |
+| `setRawSecret(string $rawSecret)`                                                                                  | `static` | Sets a secret phrase from a raw binary representation                                                         |
+| `getRawSecret()`                                                                                                   | `string` | Returns the raw representation of the current secret phrase                                                   |
+| `verifyOTP(string $otp, int\|null $timestamp = null)`                                                              | `bool`   | Verifies a one-time password (TOTP) with an optional unix timestamp                                           |
+| `createBackupCode(int $counter)`                                                                                   | `string` | Creates a counter-based one-time password (HOTP) from the given counter value                                 |
+| `verifyBackupCode(string $otp, int $counter)`                                                                      | `bool`   | Verifies a counter-based backup code (HOTP) against the given counter value                                   |
+| `getQRCode(string $label, string $issuer)`                                                                         | `string` | Creates a QR Code for use with a mobile authenticator application (TOTP) with the given label and issuer name |
 
 
 ## Anti clanker policy

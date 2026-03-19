@@ -111,7 +111,7 @@
 
 	<rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat">
 		<properties>
-			<property name="shortNullable" value="true"/>
+			<property name="shortNullable" value="false"/>
 			<property name="nullPosition" value="last"/>
 		</properties>
 	</rule>

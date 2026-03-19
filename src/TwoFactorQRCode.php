@@ -14,6 +14,8 @@ namespace chillerlan\TwoFactorQRCode;
 use chillerlan\QRCode\QRCode;
 use chillerlan\Authenticator\Authenticators\{HOTP, TOTP};
 use chillerlan\Settings\SettingsContainerInterface;
+use SensitiveParameter;
+use function is_iterable;
 
 class TwoFactorQRCode{
 
@@ -21,17 +23,21 @@ class TwoFactorQRCode{
 	protected HOTP                       $hotp;
 	protected TOTP                       $totp;
 
-	/**
-	 * @param \chillerlan\Settings\SettingsContainerInterface|\chillerlan\TwoFactorQRCode\TwoFactorQRCodeOptions|null $options
-	 */
-	public function __construct(?SettingsContainerInterface $options = null){
-		$this->options = ($options ?? new TwoFactorQRCodeOptions);
+	public function __construct(
+		SettingsContainerInterface|TwoFactorQRCodeOptions|iterable $options = new TwoFactorQRCodeOptions,
+	){
+
+		if(is_iterable($options)){
+			$options = new TwoFactorQRCodeOptions($options);
+		}
+
+		$this->options = $options;
 		$this->hotp    = new HOTP($this->options);
 		$this->totp    = new TOTP($this->options);
 	}
 
 	/**
-	 * Creates a cryptograpically secure random secret and returns it as Base32 encoded string.
+	 * Creates a cryptographically secure random secret and returns it as Base32 encoded string.
 	 *
 	 * Note: The secret length is the length of the raw binary string,
 	 *       the Base32 encoded string is considerably longer (~60%).
@@ -40,7 +46,7 @@ class TwoFactorQRCode{
 	 * @see \random_bytes()
 	 * @see \ParagonIE\ConstantTime\Base32
 	 */
-	public function createSecret(?int $length = null):string{
+	public function createSecret(int|null $length = null):string{
 		$secret = $this->hotp->createSecret($length);
 
 		$this->totp->setSecret($secret);
@@ -51,7 +57,7 @@ class TwoFactorQRCode{
 	/**
 	 * Sets a secret phrase from an encoded representation
 	 */
-	public function setSecret(string $encodedSecret):self{
+	public function setSecret(#[SensitiveParameter] string $encodedSecret):static{
 		$this->hotp->setSecret($encodedSecret);
 		$this->totp->setSecret($encodedSecret);
 
@@ -68,7 +74,7 @@ class TwoFactorQRCode{
 	/**
 	 * Sets a secret phrase from a raw binary representation
 	 */
-	public function setRawSecret(string $rawSecret):self{
+	public function setRawSecret(#[SensitiveParameter] string $rawSecret):static{
 		$this->hotp->setRawSecret($rawSecret);
 		$this->totp->setRawSecret($rawSecret);
 
@@ -87,7 +93,7 @@ class TwoFactorQRCode{
 	 *
 	 * @see \chillerlan\Authenticator\Authenticators\TOTP
 	 */
-	public function verifyOTP(string $otp, ?int $timestamp = null):bool{
+	public function verifyOTP(string $otp, int|null $timestamp = null):bool{
 		return $this->totp->verify($otp, $timestamp);
 	}
 

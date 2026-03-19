@@ -14,10 +14,11 @@ namespace chillerlan\TwoFactorQRCodeTest;
 use chillerlan\Authenticator\Common\Base32;
 use chillerlan\QRCode\Common\GDLuminanceSource;
 use chillerlan\QRCode\Decoder\Decoder;
-use chillerlan\QRCode\Output\QROutputInterface;
+use chillerlan\QRCode\Output\QRGdImagePNG;
 use chillerlan\TwoFactorQRCode\TwoFactorQRCode;
 use chillerlan\TwoFactorQRCode\TwoFactorQRCodeOptions;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use function date;
 use function is_int;
@@ -94,9 +95,7 @@ class TwoFactorQRCodeTest extends TestCase{
 		}
 	}
 
-	/**
-	 * @dataProvider totpVectors
-	 */
+	#[DataProvider('totpVectors')]
 	public function testVerifyOTP(int $timestamp, string $totp):void{
 		$this->twoFactorQRCodeOptions->digits = 8;
 
@@ -109,24 +108,20 @@ class TwoFactorQRCodeTest extends TestCase{
 		}
 	}
 
-	/**
-	 * @dataProvider hotpVectors
-	 */
+	#[DataProvider('hotpVectors')]
 	public function testCreateBackupCode(int $counter, string $hotp):void{
 		$this::assertSame($hotp, $this->twoFactorQRCode->createBackupCode($counter));
 	}
 
-	/**
-	 * @dataProvider hotpVectors
-	 */
+	#[DataProvider('hotpVectors')]
 	public function testVerifyBackupCode(int $counter, string $hotp):void{
 		$this::assertTrue($this->twoFactorQRCode->verifyBackupCode($hotp, $counter));
 	}
 
 	public function testGetQRCode():void{
 		/** @phan-suppress-next-line PhanDeprecatedClassConstant */
-		$this->twoFactorQRCodeOptions->outputType   = QROutputInterface::GDIMAGE_PNG;
-		$this->twoFactorQRCodeOptions->outputBase64 = false;
+		$this->twoFactorQRCodeOptions->outputInterface = QRGdImagePNG::class;
+		$this->twoFactorQRCodeOptions->outputBase64    = false;
 
 		$qrcode = $this->twoFactorQRCode->getQRCode('testLabel', 'testIssuer');
 		$result = (new Decoder)->decode(GDLuminanceSource::fromBlob($qrcode));

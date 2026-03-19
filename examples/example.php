@@ -10,7 +10,6 @@
 declare(strict_types=1);
 
 use chillerlan\TwoFactorQRCode\TwoFactorQRCode;
-use chillerlan\TwoFactorQRCode\TwoFactorQRCodeOptions;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -24,9 +23,8 @@ $options = [
 	'adjacent'      => 2,
 ];
 
-// invoke settings and TwoFactorQRCode instance
-$twoFactorQRCodeOptions = new TwoFactorQRCodeOptions($options);
-$twoFactorQRCode        = new TwoFactorQRCode($twoFactorQRCodeOptions);
+// invoke  TwoFactorQRCode instance
+$twoFactorQRCode = new TwoFactorQRCode($options);
 
 
 /**
