@@ -33,7 +33,7 @@ $twoFactorQRCode        = new TwoFactorQRCode($twoFactorQRCodeOptions);
  * installation
  */
 
-// crate a secret, present it to the user as text
+// create a secret, present it to the user as text
 $newSecret = $twoFactorQRCode->createSecret();
 
 // also create a QR Code and present it to the user
@@ -42,7 +42,7 @@ $qrcode    = $twoFactorQRCode->getQRCode('label', 'issuer');
 // generate a backup code and present it as well, save the counter value
 $backup    = $twoFactorQRCode->createBackupCode(0);
 
-// during the registration, let the user supply an OTP withthe above data abd verify it
+// during the registration, let the user supply an OTP with the above data and verify it
 if($twoFactorQRCode->verifyOTP('069420')){
 	// proceed with installation, save data
 	echo 'yay!';
@@ -56,7 +56,7 @@ if($twoFactorQRCode->verifyOTP('069420')){
 // set the secret from the user's data
 $twoFactorQRCode->setSecret('GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ');
 
-// present the useer with a form field for the OTP and verify it
+// present the user with a form field for the OTP and verify it
 if($twoFactorQRCode->verifyOTP('420069')){
 	// redirect to wherever the user was headed
 }
@@ -66,7 +66,7 @@ if($twoFactorQRCode->verifyOTP('420069')){
  * using a backup code
  */
 
-// the user lost access to their authenticator, send them to a form separate from the usual OTP input
+// the user has lost access to their authenticator, send them to a form separate from the usual OTP input
 // verify the given OTP against the stored counter value
 if($twoFactorQRCode->verifyBackupCode('694711', 0)){
 	// after verification, create a new backup code and save the new counter value
