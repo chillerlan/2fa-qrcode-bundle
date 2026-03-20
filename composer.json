@@ -34,7 +34,7 @@
 	"prefer-stable": true,
 	"require": {
 		"php": "^8.2",
-		"chillerlan/php-authenticator": "^5.4.0",
+		"chillerlan/php-authenticator": "^5.4.1",
 		"chillerlan/php-qrcode": "^6.0",
 		"chillerlan/php-settings-container": "^3.2.1"
 	},
