@@ -13,9 +13,9 @@ An authenticator ([chillerlan/php-authenticator](https://github.com/chillerlan/p
 [packagist-badge]: https://img.shields.io/packagist/v/chillerlan/2fa-qrcode-bundle.svg?logo=packagist&logoColor=fff
 [packagist]: https://packagist.org/packages/chillerlan/2fa-qrcode-bundle
 [license-badge]: https://img.shields.io/github/license/chillerlan/2fa-qrcode-bundle
-[license]: https://github.com/chillerlan/2fa-qrcode-bundle/blob/main/LICENSE
-[gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/2fa-qrcode-bundle/ci.yml?branch=main&logo=github&logoColor=fff
-[gh-action]: https://github.com/chillerlan/2fa-qrcode-bundle/actions/workflows/ci.yml?query=branch%3Amain
+[license]: https://github.com/chillerlan/2fa-qrcode-bundle/blob/v2.x/LICENSE
+[gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/2fa-qrcode-bundle/ci.yml?branch=v2.x&logo=github&logoColor=fff
+[gh-action]: https://github.com/chillerlan/2fa-qrcode-bundle/actions/workflows/ci.yml?query=branch%3Av2.x
 [downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/2fa-qrcode-bundle.svg?logo=packagist&logoColor=fff
 [downloads]: https://packagist.org/packages/chillerlan/2fa-qrcode-bundle/stats
 
