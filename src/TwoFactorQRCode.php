@@ -31,7 +31,7 @@ class TwoFactorQRCode{
 	}
 
 	/**
-	 * Creates a cryptograpically secure random secret and returns it as Base32 encoded string.
+	 * Creates a cryptographically secure random secret and returns it as Base32 encoded string.
 	 *
 	 * Note: The secret length is the length of the raw binary string,
 	 *       the Base32 encoded string is considerably longer (~60%).

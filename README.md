@@ -100,7 +100,6 @@ The user has lost access to their authenticator, send them to a form separate fr
 - Verify the given backup OTP against the stored counter value.
 - After verification, increase the counter, create a new backup code and save the new counter value.
 - Present the new backup code to the user and make them triple check that they have carefully saved it.
-- Redirect the user to wherever they can manage their 2FA settings and retrieve their secret once again.
 
 ```php
 $twoFactorQRCode->setSecret($userSecret);
@@ -112,6 +111,15 @@ if($twoFactorQRCode->verifyBackupCode($backupOTP, $counterValue)){
 
 	// redirect
 }
+```
+
+Redirect the user to wherever they can manage their 2FA settings and retrieve their secret once again:
+
+```php
+$twoFactorQRCode->setSecret($userSecret);
+
+$currentBackup = $twoFactorQRCode->createBackupCode($currentCounterValue);
+$qrcode        = $twoFactorQRCode->getQRCode('label', 'issuer');
 ```
 
 #### Validating an e-mail address
