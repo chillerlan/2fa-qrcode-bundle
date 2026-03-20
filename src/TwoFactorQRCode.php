@@ -124,7 +124,7 @@ class TwoFactorQRCode{
 	public function getQRCode(string $label, string $issuer):string{
 		$uri = $this->totp->getUri($label, $issuer);
 
-		return (new QRCode($this->options))->render($uri);
+		return new QRCode($this->options)->render($uri);
 	}
 
 }

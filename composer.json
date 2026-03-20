@@ -30,12 +30,12 @@
 		"issues": "https://github.com/chillerlan/2fa-qrcode-bundle/issues",
 		"source": "https://github.com/chillerlan/2fa-qrcode-bundle"
 	},
-	"minimum-stability": "stable",
+	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"php": "^8.2",
-		"chillerlan/php-authenticator": "^5.4.0",
-		"chillerlan/php-qrcode": "^6.0",
+		"php": "^8.4",
+		"chillerlan/php-authenticator": "dev-main",
+		"chillerlan/php-qrcode": "dev-main",
 		"chillerlan/php-settings-container": "^3.2.1"
 	},
 	"require-dev": {

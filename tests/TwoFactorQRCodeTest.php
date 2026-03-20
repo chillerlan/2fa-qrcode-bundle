@@ -30,12 +30,12 @@ class TwoFactorQRCodeTest extends TestCase{
 	/**
 	 * @see https://datatracker.ietf.org/doc/html/rfc6238#appendix-B
 	 */
-	protected const secret = 'GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ';
+	final protected const string secret = 'GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ';
 
 	/**
 	 * @see https://tools.ietf.org/html/rfc4226#page-32
 	 */
-	protected const rfc4226Vectors = [
+	final protected const array rfc4226Vectors = [
 		[0, '755224'],
 		[1, '287082'],
 		[2, '359152'],
@@ -51,7 +51,7 @@ class TwoFactorQRCodeTest extends TestCase{
 	/**
 	 * @see https://datatracker.ietf.org/doc/html/rfc6238#appendix-B
 	 */
-	protected const rfc6238Vectors = [
+	final protected const array rfc6238Vectors = [
 		[         59, '94287082'],
 		[ 1111111109, '07081804'],
 		[ 1111111111, '14050471'],
@@ -124,7 +124,7 @@ class TwoFactorQRCodeTest extends TestCase{
 		$this->twoFactorQRCodeOptions->outputBase64    = false;
 
 		$qrcode = $this->twoFactorQRCode->getQRCode('testLabel', 'testIssuer');
-		$result = (new Decoder)->decode(GDLuminanceSource::fromBlob($qrcode));
+		$result = new Decoder()->decode(GDLuminanceSource::fromBlob($qrcode));
 
 		$this::assertSame('otpauth://totp/testLabel?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&issuer=testIssuer', $result->data);
 	}

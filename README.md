@@ -21,7 +21,7 @@ An authenticator ([chillerlan/php-authenticator](https://github.com/chillerlan/p
 
 ## Requirements
 
-- PHP 8.2+
+- PHP 8.4+
   - [`ext-mbstring`](https://www.php.net/manual/book.mbstring.php)
   - optional:
     - [`ext-gd`](https://www.php.net/manual/book.image) for `QRGdImage` based output
